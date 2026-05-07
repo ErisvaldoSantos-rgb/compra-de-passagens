@@ -1,36 +1,32 @@
-Algoritmo "compra de passagens"
+algoritmo "Compra-De-Passagens"
+// Disciplina   : LÃ³gica de ProgramaÃ§Ã£o
+// Professor(a)   :  Giselle
 
-Var
-   // Seção de Declarações das variáveis
-   Nome, Destino :Caractere
+var
+   nome, destino: caractere
 
-   idade, opcao, tipoPassagem , qtdPassagem:Inteiro
+   idade, opcao, tipoPassagem, qtdPassagem:inteiro
 
-   Salvador , FeiraDeSantana , Alagoinhas , Desconto, totalp:real
+   precoUnit, totalp: real
 
-Inicio
-   // Seção de Comandos, procedimento, funções, operadores, etc...
-   totalp <- 0
-   Salvador <- 0
-   FeiraDeSantana  <- 0
-   Alagoinhas <- 0
-   Desconto <- 0
-   qtdPassagem <- 0
+inicio
+
+   totalp  <- 0
+
+   opcao   <- -1
+
+   repita
 
 
-   Repita
+      escreval("==== COMPRA DE PASSAGENS ====")
 
-      escreval("==== Compras de Passagens  ====")
+      escreval("1 - Cadastrar passageiro")
 
-      escreval("MENU")
+      escreval("2 - Comprar passagem")
 
-      escreval("1 - Cadastrar Passageiro ")
+      escreval("3 - Ver resumo")
 
-      escreval("2 - Comprar passagem  ")
-
-      escreval("3 - Ver relatório  ")
-
-      escreval("0 - Sair  ")
+      escreval("0 - Sair")
 
       leia(opcao)
 
@@ -38,158 +34,164 @@ Inicio
 
       caso 1
 
-         escreval("Cadastrar Passageiro ")
+         escreval("=== Cadastro de Passageiro ===")
 
          repita
 
-            escreval("Digite seu nome: ")
+            escreva("Nome: ")
 
             leia(nome)
 
-            se nome = "" Entao
+            se nome = "" entao
 
-
-               escreval("Este nome é incorreto, Digite o nome correspondente  ")
+               escreval("Nome invalido. Tente novamente.")
 
             fimse
 
          ate nome <> ""
 
+         repita
 
-         Repita
-            escreval("Digite sua idade: ")
+            escreva("Idade: ")
 
             leia(idade)
 
-            se idade <= 0 Entao
+            se idade <= 0 entao
 
-               escreval("Idade inválida tente novamente ")
+               escreval("Idade invalida. Tente novamente.")
 
             fimse
 
          ate idade > 0
 
-      Caso 2
+         escreval("Passageiro cadastrado com sucesso!")
+
+      caso 2
+
+         escreval("=== Compra de Passagem ===")
 
          repita
 
-            escreval("Compra de passagem: ")
+            escreval("Destino:")
 
-            escreval("1 - Salvador (R$ 50)")
+            escreval("  1 - Salvador       (R$ 50)")
 
-            escreval("2 - Feira de Santana (R$ 30)")
+            escreval("  2 - Feira de Santana (R$ 30)")
 
-            escreval("3 - Alagoinhas (R$ 20)")
+            escreval("  3 - Alagoinhas     (R$ 20)")
+
+            escreva("Opcao: ")
 
             leia(tipoPassagem)
 
-            escreval("Digite a quantidade de passagens desejada")
+            se (tipoPassagem < 1) ou (tipoPassagem > 3) entao
 
-            leia(qtdPassagem)
-
-            se (tipoPassagem < 1) ou (tipoPassagem > 3) Entao
-
-               escreval("Tipo inválido tente novamente ")
+               escreval("Destino invalido. Tente novamente.")
 
             fimse
 
          ate (tipoPassagem >= 1) e (tipoPassagem <= 3)
 
-         se tipoPassagem = 1 Entao
+         se tipoPassagem = 1 entao
 
-            Destino <- "Salvador"
+            destino   <- "Salvador"
 
-            Salvador <- 50
-
-            totalp <- qtdPassagem * Salvador
+            precoUnit <- 50
 
          senao
 
-            se tipoPassagem = 2 Entao
+            se tipoPassagem = 2 entao
 
-               Destino <- "Feira de Santana"
+               destino   <- "Feira de Santana"
 
-               Salvador <- 30
-
-               totalp <- qtdPassagem * FeiraDeSantana
+               precoUnit <- 30
 
             senao
 
-               se tipoPassagem = 3 Entao
+               destino   <- "Alagoinhas"
 
-                  Destino <- "Alagoinhas"
-
-                  Salvador <- 20
-
-                  totalp <- qtdPassagem * Alagoinhas
-
-               fimse
+               precoUnit <- 20
 
             fimse
-
 
          fimse
 
-         se qtdPassagem > 3 Entao
+         escreva("Quantidade de passagens: ")
 
-            Desconto <- (10 * 100)/totalp
+         leia(qtdPassagem)
 
-            escreval("Desconto de 10 % ")
+         totalp <- qtdPassagem * precoUnit
+
+         se idade >= 60 entao
+
+            se qtdPassagem <= 2 entao
+
+               totalp <- 0
+
+               escreval("Gratuidade aplicada (idoso).")
+
+            senao
+
+               escreval("Limite de 2 passagens gratuitas excedido.")
+
+               escreval("Desconto de 20% aplicado.")
+
+               totalp <- totalp * 0.80
+
+            fimse
+
          senao
 
-            se (idade <= 18) entao
+            se idade <= 18 entao
 
-               tipoPassagem <- totalp  / 2
+               totalp <- totalp * 0.50
 
-               escreval("Passagem Estudantil ")
-
-            senao
-
-               se (idade >= 60)entao
-
-                  tipoPassagem  <- (20 * 100) / totalp
-
-                  escreval("Passagem idoso ")
-
-               senao
-
-
-                  escreval("Entrada inválida acesso não permitido para esta idade ")
-
-               fimse
+               escreval("Desconto estudantil de 50% aplicado.")
 
             fimse
 
-         Caso 3
+         fimse
 
-            escreval("==== ver resumo ====")
+         se qtdPassagem >= 3 entao
 
+            totalp <- totalp * 0.90
 
-            se totalp > 0 Entao
+            escreval("Desconto de 10% por quantidade aplicado.")
 
-               escreval("Nome do passageiro ",nome)
+         fimse
 
-               escreval("Destino escolhido ",Destino)
+         escreval("Compra realizada com sucesso!")
 
-               escreval("Quantidade de passagens ",qtdPassagem)
+      caso 3
 
-               escreval("Total de Passagens  : R$", totalp:5:2)
-            senao
+         escreval("===== RESUMO DA COMPRA =====")
 
-               escreval("Nenhuma passagem encontrada ainda ")
+         se (totalp >= 0) e (qtdPassagem > 0) entao
 
-            fimse
+            escreval("Nome do passageiro : ", nome)
 
-         Caso 0
+            escreval("Destino escolhido  : ", destino)
 
-            escreval("Sistema encerrado ")
+            escreval("Qtd de passagens   : ", qtdPassagem)
 
-         Outrocaso
+            escreval("Total da compra    : R$", totalp:5:2)
 
-            escreval("Opção inválida tente novamente ")
+         senao
 
-         fimescolha
+            escreval("Nenhuma passagem comprada ainda.")
 
-      ate opcao = 0
+         fimse
 
-Fimalgoritmo
+      caso 0
+
+         escreval("Sistema encerrado.")
+
+      outrocaso
+
+         escreval("Opcao invalida. Tente novamente.")
+
+      fimescolha
+
+   ate opcao = 0
+
+fimalgoritmo
